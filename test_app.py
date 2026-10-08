@@ -1,9 +1,9 @@
 import pytest
-from app import app, tarefas
+from app import app, tasks
 
 @pytest.fixture
 def client():
-    tarefas.clear()  # Clear the tarefas list before each test
+    tasks.clear()
     return app.test_client()
 
 def test_health(client):
@@ -11,17 +11,17 @@ def test_health(client):
     assert response.status_code == 200
     assert response.get_json() == {"status": "ok"}
 
-def test_add_tarefa(client):
-    response = client.post('/tarefas', json={"titulo": "Estudar Flask"})
+def test_create_task(client):
+    response = client.post('/tasks', json={"title": "Estudar Flask"})
     assert response.status_code == 201
     data = response.get_json()
-    assert data["titulo"] == "Estudar Flask"
+    assert data["title"] == "Estudar Flask"
     assert data["id"] == 1
 
-def test_listar_tarefas(client):
-    client.post('/tarefas', json={"titulo": "Estudar Flask"})
-    response = client.get('/tarefas')
+def test_list_tasks(client):
+    client.post('/tasks', json={"title": "Estudar Flask"})
+    response = client.get('/tasks')
     assert response.status_code == 200
-    data = response.get_json()
-    assert len(data) == 1
-    assert data[0]["titulo"] == "Estudar Flask"
+    tasks_list = response.get_json()
+    assert len(tasks_list) == 1
+    assert tasks_list[0]["title"] == "Estudar Flask"
