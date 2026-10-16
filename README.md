@@ -24,7 +24,7 @@ source venv/bin/activate        # Linux/macOS/Git Bash
 # venv\Scripts\Activate.ps1     # Windows PowerShell
 
 # Install dependencies
-pip install flask pytest
+pip install -r requirements.txt
 ```
 
 ## Running the server
