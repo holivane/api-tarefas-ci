@@ -29,3 +29,8 @@ def test_list_tasks(client):
     tasks_list = response.get_json()
     assert len(tasks_list) == 1
     assert tasks_list[0]["title"] == "Study Flask"
+
+
+def test_create_taks_without_title(client):
+    response = client.post('/tasks', json={})
+    assert response.status_code == 400
