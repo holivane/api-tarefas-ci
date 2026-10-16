@@ -1,15 +1,18 @@
 import pytest
 from app import app, tasks
 
+
 @pytest.fixture
 def client():
     tasks.clear()
     return app.test_client()
 
+
 def test_health(client):
     response = client.get('/health')
     assert response.status_code == 200
     assert response.get_json() == {"status": "ok"}
+
 
 def test_create_task(client):
     response = client.post('/tasks', json={"title": "Study Flask"})
@@ -17,6 +20,7 @@ def test_create_task(client):
     data = response.get_json()
     assert data["title"] == "Study Flask"
     assert data["id"] == 1
+
 
 def test_list_tasks(client):
     client.post('/tasks', json={"title": "Study Flask"})

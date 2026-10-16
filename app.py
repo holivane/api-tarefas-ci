@@ -3,9 +3,16 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 tasks = []
 
+
+@app.route('/')
+def home():
+    return jsonify({"message": "Boas-vindas a API de Tasks!"})
+
+
 @app.route('/health')
 def health():
     return {"status": "ok"}
+
 
 @app.route('/tasks', methods=['POST'])
 def create_task():
@@ -13,6 +20,7 @@ def create_task():
     task = {"id": len(tasks) + 1, "title": data["title"]}
     tasks.append(task)
     return task, 201
+
 
 @app.route('/tasks', methods=['GET'])
 def list_tasks():
