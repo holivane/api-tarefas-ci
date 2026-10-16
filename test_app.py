@@ -31,6 +31,15 @@ def test_list_tasks(client):
     assert tasks_list[0]["title"] == "Study Flask"
 
 
-def test_create_taks_without_title(client):
+def test_create_task_without_title(client):
     response = client.post('/tasks', json={})
+    assert response.status_code == 400
+
+
+def test_create_task_with_null_body(client):
+    response = client.post(
+        '/tasks',
+        data='null',
+        content_type='application/json'
+    )
     assert response.status_code == 400

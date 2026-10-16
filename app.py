@@ -18,9 +18,9 @@ def health():
 def create_task():
     data = request.get_json()
 
-    if "title" not in data:
-        return {"error": "Title is required"}, 400
-
+    if not isinstance(data, dict) or "title" not in data:
+        return {"error": "Invalid request body"}, 400
+    
     task = {"id": len(tasks) + 1, "title": data["title"]}
     tasks.append(task)
     return task, 201
