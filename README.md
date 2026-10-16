@@ -78,4 +78,3 @@ The tests use Flask's test client, so the server does not need to be running.
 
 - Validate input (e.g. missing `title`)
 - Add more routes (get, update and delete a single task)
-- Set up continuous integration
