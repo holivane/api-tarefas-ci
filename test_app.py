@@ -34,3 +34,4 @@ def test_list_tasks(client):
 def test_create_taks_without_title(client):
     response = client.post('/tasks', json={})
     assert response.status_code == 400
+
