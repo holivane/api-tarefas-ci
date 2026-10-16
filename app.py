@@ -20,7 +20,7 @@ def create_task():
 
     if not isinstance(data, dict) or "title" not in data:
         return {"error": "Invalid request body"}, 400
-    
+
     task = {"id": len(tasks) + 1, "title": data["title"]}
     tasks.append(task)
     return task, 201
